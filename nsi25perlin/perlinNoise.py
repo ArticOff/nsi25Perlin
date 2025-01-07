@@ -3,15 +3,13 @@ from math import floor
 
 from proto import proto
 
-type Number = int | float
-
-def fade(t: Number) -> Number:
+def fade(t: int | float) -> int | float:
     return t * t * t * (t * (t * 6 - 15) + 10)
 
-def lerp(t: Number, a: Number, b: Number) -> Number:
+def lerp(t: int | float, a: int | float, b: int | float) -> int | float:
     return a + t * (b - a)
 
-def grad(hash: Number, x: Number, y: Number, z: Number) -> Number:
+def grad(hash: int | float, x: int | float, y: int | float, z: int | float) -> int | float:
     h = hash % 16
     u = x if h < 8 else y
     v = y if h < 4 else (x if h == 12 or h == 14 else z)
@@ -43,7 +41,7 @@ with proto("PerlinNoise") as PerlinNoise:
         return
 
     @PerlinNoise    
-    def noise(self, x: Number, y: Number, z: Number = 0) -> Number:
+    def noise(self, x: int | float, y: int | float, z: int | float = 0) -> int | float:
         X = floor(x) % self.size
         Y = floor(y) % self.size
         Z = floor(z) % self.size
